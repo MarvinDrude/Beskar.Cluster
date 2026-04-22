@@ -1,0 +1,51 @@
+name: beskar-database-stack
+services:
+  # Databases
+  # PostgreSQL
+  postgres-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: db_meta
+    volumes:
+      - pg_data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d db_meta" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  # Dev PostgreSQL Frontend
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres-db
+  # StarRocks
+  starrocks:
+    image: starrocks/allin1-ubuntu:latest
+    restart: always
+    ports:
+      - "9030:9030" # MySQL Protocol
+      - "8030:8030" # HTTP UI
+      - "8040:8040" # BE HTTP UI
+    volumes:
+      - sr_data:/opt/starrocks/
+  # Dev StarRocks Frontend
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    restart: always
+    ports:
+      - "8978:8978"
+    volumes:
+      - cb_data:/opt/cloudbeaver/workspace
+volumes:
+  pg_data:
+  sr_data:
+  cb_data:

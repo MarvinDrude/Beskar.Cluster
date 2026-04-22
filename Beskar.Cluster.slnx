@@ -8,5 +8,11 @@
     <File Path="README.md" />
     <File Path="SECURITY.md" />
   </Folder>
+  <Folder Name="/Additional Solution Items/Docker/">
+    <File Path="Docker/.env" />
+    <File Path="Docker/docker-compose.yml" />
+  </Folder>
+  <Folder Name="/Common/" />
+  <Folder Name="/Databases/" />
   <Folder Name="/Logging/" />
 </Solution>
