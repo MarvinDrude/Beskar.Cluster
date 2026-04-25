@@ -18,7 +18,12 @@
     <Project Path="Common/Beskar.Cluster.Configuration/Beskar.Cluster.Configuration.csproj" />
     <Project Path="Common/Beskar.Cluster.Sockets/Beskar.Cluster.Sockets.csproj" />
   </Folder>
-  <Folder Name="/Databases/" />
+  <Folder Name="/Databases/">
+    <Project Path="Databases/Beskar.Cluster.Database.Common/Beskar.Cluster.Database.Common.csproj" />
+    <Project Path="Databases/Beskar.Cluster.Database.Main/Beskar.Cluster.Database.Main.csproj" />
+    <Project Path="Databases/Beskar.Cluster.Database.Update/Beskar.Cluster.Database.Update.csproj" />
+  </Folder>
+  <Folder Name="/Distributed/" />
   <Folder Name="/Experiments/">
     <Project Path="Experiments/Beskar.Cluster.Experiment/Beskar.Cluster.Experiment.csproj" />
   </Folder>

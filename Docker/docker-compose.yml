@@ -45,6 +45,15 @@ services:
       - "8978:8978"
     volumes:
       - cb_data:/opt/cloudbeaver/workspace
+  # Garnet cache / queue
+  garnet:
+    image: ghcr.io/microsoft/garnet
+    container_name: garnet-cache
+    restart: always
+    ulimits:
+      memlock: -1
+    ports:
+      - "6379:6379"
 volumes:
   pg_data:
   sr_data:

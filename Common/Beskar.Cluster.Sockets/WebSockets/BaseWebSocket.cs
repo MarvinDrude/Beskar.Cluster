@@ -114,8 +114,6 @@ public abstract class BaseWebSocket<TRegistry>(
 
    public async ValueTask DisposeAsync()
    {
-      GC.SuppressFinalize(this);
-      
       if (_cts is not null)
       {
          await _cts.CancelAsync();
@@ -134,5 +132,7 @@ public abstract class BaseWebSocket<TRegistry>(
       _cts = null;
       _readingTask = null;
       _packetTask = null;
+      
+      GC.SuppressFinalize(this);
    }
 }

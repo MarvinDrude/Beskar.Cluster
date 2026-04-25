@@ -1,10 +1,13 @@
-﻿namespace Beskar.Cluster.Configuration.Extensions;
+﻿
+using Beskar.Cluster.Configuration.Models;
+
+namespace Beskar.Cluster.Configuration.Extensions;
 
 public static class ConfigurationManagerExtensions
 {
    extension(ConfigurationManager config)
    {
-      public void SetupBeskarClusterConfiguration(string[] args)
+      public MainOptions SetupBeskarClusterConfiguration(IHostApplicationBuilder builder, string[] args)
       {
          config.Sources.Clear();
          
@@ -13,6 +16,11 @@ public static class ConfigurationManagerExtensions
             .AddEnvironmentVariables()
             .AddCommandLine(args)
             .AddJsonFile("appsettings.User.json", optional: true, reloadOnChange: true);
+         
+         builder.Services.Configure<MainOptions>(config.GetSection("Main"));
+         
+         var options = config.GetRequiredSection("Main").Get<MainOptions>();
+         return options ?? throw new InvalidOperationException("Main options not found");
       }
    }
 }
