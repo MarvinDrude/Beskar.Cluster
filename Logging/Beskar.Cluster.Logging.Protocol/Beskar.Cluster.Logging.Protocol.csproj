@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <Folder Include="Client\" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <PackageReference Include="Beskar.CodeGeneration.PacketGenerator" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\..\Common\Beskar.Cluster.Sockets\Beskar.Cluster.Sockets.csproj" />
+   </ItemGroup>
+
+</Project>
