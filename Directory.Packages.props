@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
     <PackageVersion Include="Beskar.CodeGeneration.PacketGenerator" Version="1.1.9" />
+    <PackageVersion Include="Beskar.CodeGeneration.TypeIdGenerator" Version="1.1.9" />
     <PackageVersion Include="Me.Memory" Version="1.4.0" />
     <PackageVersion Include="MessagePack" Version="3.1.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="5.3.0" />
