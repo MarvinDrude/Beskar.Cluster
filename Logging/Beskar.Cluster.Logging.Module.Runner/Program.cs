@@ -6,6 +6,7 @@ using Beskar.Cluster.Database.Update;
 using Beskar.Cluster.Logging.Module.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.UseBeskarClusterLogging();
 
 builder.Services
    .AddBeskarClusterServerLogging()

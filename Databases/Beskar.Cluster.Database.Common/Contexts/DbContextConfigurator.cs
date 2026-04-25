@@ -54,12 +54,12 @@ public sealed class DbContextConfigurator(
    public ValueTask Configure(
       DbContextKind kind, DbContextOptionsBuilder optionsBuilder, CancellationToken ct = default)
    {
-      optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-         .UseLoggerFactory(loggerFactory);
+      optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
       
       if (_logger.IsEnabled(LogLevel.Debug))
       {
-         optionsBuilder.EnableSensitiveDataLogging();
+         optionsBuilder.EnableSensitiveDataLogging()
+            .UseLoggerFactory(loggerFactory);
       }
 
       var connectionString = _connectionStringProvider.GetConnectionString(kind, ct);
