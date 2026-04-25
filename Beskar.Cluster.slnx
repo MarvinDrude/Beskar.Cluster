@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/Additional Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
     <File Path="CONTRIBUTING.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
@@ -13,6 +15,7 @@
     <File Path="Docker/docker-compose.yml" />
   </Folder>
   <Folder Name="/Common/">
+    <Project Path="Common/Beskar.Cluster.Configuration/Beskar.Cluster.Configuration.csproj" />
     <Project Path="Common/Beskar.Cluster.Sockets/Beskar.Cluster.Sockets.csproj" />
   </Folder>
   <Folder Name="/Databases/" />
