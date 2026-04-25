@@ -8,6 +8,9 @@
    </PropertyGroup>
 
    <ItemGroup>
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Update\Beskar.Cluster.Database.Update.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Logging.Protocol\Beskar.Cluster.Logging.Protocol.csproj" />
    </ItemGroup>
 

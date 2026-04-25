@@ -1,12 +1,25 @@
 using Beskar.Cluster.Configuration.Extensions;
+using Beskar.Cluster.Database.Common.Enums;
+using Beskar.Cluster.Database.Common.Extensions;
+using Beskar.Cluster.Database.Main.Contexts;
+using Beskar.Cluster.Database.Update;
 using Beskar.Cluster.Logging.Module.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddBeskarClusterServerLogging();
-builder.Configuration.SetupBeskarClusterConfiguration(builder, args);
+builder.Services
+   .AddBeskarClusterServerLogging()
+   .AddBeskarClusterCommonDatabaseServices()
+   .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main);
+
+builder.Configuration
+   .SetupBeskarClusterConfiguration(builder, args);
 
 var app = builder.Build();
+
+var migrator = new MigrationRunner(app.Services);
+await migrator.TryMigrate();
+
 app.UseHttpsRedirection();
 
 app.UseWebSockets();

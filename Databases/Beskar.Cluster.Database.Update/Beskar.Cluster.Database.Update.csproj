@@ -6,4 +6,13 @@
       <Nullable>enable</Nullable>
    </PropertyGroup>
 
+   <ItemGroup>
+     <PackageReference Include="Npgsql" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
+   </ItemGroup>
+
 </Project>

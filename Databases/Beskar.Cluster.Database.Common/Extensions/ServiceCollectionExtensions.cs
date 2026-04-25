@@ -24,7 +24,9 @@ public static class ServiceCollectionExtensions
       {
          services.AddPooledDbContextFactory<TContext>((sp, options) =>
          {
-            var configurator = sp.GetRequiredService<IDbContextConfigurator>();
+            using var scope = sp.CreateScope();
+            
+            var configurator = scope.ServiceProvider.GetRequiredService<IDbContextConfigurator>();
             AsyncSyncHelper.RunSync(async () => await configurator.Configure(kind, options));
          }, 2048);
          
