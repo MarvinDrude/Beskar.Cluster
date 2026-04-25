@@ -25,15 +25,14 @@ public abstract class BaseWebSocket<TRegistry>(
    private Task<VoidResult<StringError>>? _readingTask;
    private Task<VoidResult<StringError>>? _packetTask;
    
-   public ValueTask StartProcessing(CancellationToken ct = default)
+   public Task StartProcessing(CancellationToken ct = default)
    {
       _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
       
       _readingTask = WebSocket.CreateListenExecution(Pipe, 4096 * 2, _cts.Token);
       _packetTask = CreatePacketExecution(_cts.Token);
 
-      // dont block this by "endless" processing
-      return ValueTask.CompletedTask;
+      return _packetTask;
    }
    
    public ValueTask SendPacket<TPacket>(TPacket packet, CancellationToken ct = default)

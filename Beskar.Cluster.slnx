@@ -20,6 +20,8 @@
     <Project Path="Experiments/Beskar.Cluster.Experiment/Beskar.Cluster.Experiment.csproj" />
   </Folder>
   <Folder Name="/Logging/">
+    <Project Path="Logging/Beskar.Cluster.Logging.Module.Runner/Beskar.Cluster.Logging.Module.Runner.csproj" />
+    <Project Path="Logging/Beskar.Cluster.Logging.Module/Beskar.Cluster.Logging.Module.csproj" />
     <Project Path="Logging/Beskar.Cluster.Logging.Protocol/Beskar.Cluster.Logging.Protocol.csproj" />
   </Folder>
 </Solution>
