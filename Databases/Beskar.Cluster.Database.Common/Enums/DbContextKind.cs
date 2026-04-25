@@ -2,5 +2,6 @@
 
 public enum DbContextKind : byte
 {
+   Unknown = 0,
    Main = 1
 }

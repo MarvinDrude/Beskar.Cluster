@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
          where TContext : DbBaseContext
          where TContextFactory : DbBaseContextFactory<TContext>
       {
-         services.AddDbContextPool<TContext>((sp, options) =>
+         services.AddPooledDbContextFactory<TContext>((sp, options) =>
          {
             var configurator = sp.GetRequiredService<IDbContextConfigurator>();
             AsyncSyncHelper.RunSync(async () => await configurator.Configure(kind, options));

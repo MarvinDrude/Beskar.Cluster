@@ -8,7 +8,7 @@ namespace Beskar.Cluster.Database.Common.Contexts;
 
 public abstract class DbBaseContext(
    DbContextOptions options)
-   : DbContext(options)
+   : DbContext(options), IDbPooledContext
 {
    public abstract DbContextKind Kind { get; }
    
@@ -18,7 +18,14 @@ public abstract class DbBaseContext(
    {
       _configurator = provider.GetRequiredService<IDbContextConfigurator>();
       
-      return ValueTask.CompletedTask;
+      var updateTask = _configurator.UpdateConfigure(Kind, this);
+      return updateTask.IsCompletedSuccessfully 
+         ? ValueTask.CompletedTask : Awaited();
+      
+      async ValueTask Awaited()
+      {
+         await updateTask;
+      }
    }
    
    protected virtual ValueTask InvalidateState()
@@ -26,16 +33,6 @@ public abstract class DbBaseContext(
       _configurator = null;
       
       return ValueTask.CompletedTask;
-   }
-
-   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-   {
-      base.OnConfiguring(optionsBuilder);
-
-      if (_configurator is not null)
-      {
-         AsyncSyncHelper.RunSync(async () => await _configurator.Configure(Kind, optionsBuilder));
-      }
    }
 
    public override async ValueTask DisposeAsync()
@@ -48,7 +45,10 @@ public abstract class DbBaseContext(
 
    public override void Dispose()
    {
+      // only called in migration creation - otherwise always dispose async
+      AsyncSyncHelper.RunSync(async () => await InvalidateState());
       base.Dispose();
-      throw new InvalidOperationException("DisposeAsync must be called.");
+      
+      GC.SuppressFinalize(this);
    }
 }

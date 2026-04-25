@@ -7,9 +7,9 @@ namespace Beskar.Cluster.Database.Main.Entities.System;
 public sealed class DbSystemConfigEntryConfiguration 
    : IEntityTypeConfiguration<DbSystemConfigEntry>
 {
-   public static readonly ValueConverter<Guid, DbSystemConfigEntryId> KeyConverter = new (
-      id => new DbSystemConfigEntryId(id),
-      id => id.Value
+   public static readonly ValueConverter<DbSystemConfigEntryId, Guid> KeyConverter = new (
+      id => id.Value,
+      id => new DbSystemConfigEntryId(id)
    );
    
    public void Configure(EntityTypeBuilder<DbSystemConfigEntry> builder)

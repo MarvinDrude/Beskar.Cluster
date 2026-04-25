@@ -2,7 +2,7 @@
 
 namespace Beskar.Cluster.Database.Common.Contexts;
 
-public abstract class DbContextProvider<TContext>(IDbPooledContextFactory<TContext> factory) : IAsyncDisposable
+public sealed class DbContextProvider<TContext>(IDbPooledContextFactory<TContext> factory) : IAsyncDisposable
    where TContext : DbBaseContext
 {
    private readonly IDbPooledContextFactory<TContext> _factory = factory;
