@@ -1,24 +1,39 @@
 ﻿using Beskar.Cluster.Configuration.Models;
 using Beskar.Cluster.Database.Telemetry.Interfaces;
+using Beskar.Cluster.Database.Telemetry.StarRocks.Models;
+using Beskar.Cluster.Logging.Protocol.Server.Logging;
 using Microsoft.Extensions.Options;
 using MySqlConnector;
 
 namespace Beskar.Cluster.Database.Telemetry.StarRocks;
 
-public sealed class StarRockLogService(IOptionsMonitor<MainOptions> options) : ILogService
+public sealed class StarRockLogService(
+   IOptionsMonitor<MainOptions> options,
+   StarRockSreamer sreamer) 
+   : ILogService
 {
    private readonly IOptionsMonitor<MainOptions> _optionsMonitor = options;
+   private readonly StarRockSreamer _sreamer = sreamer;
+   
    private MainOptions Options => _optionsMonitor.CurrentValue;
+
+   public async Task InsertEntries(List<StructuredLogRecord> entries, CancellationToken ct = default)
+   {
+      await _sreamer.StreamData(
+         StarRockLogMap.TableName, StarRockLogMap.GetColumns(), 
+         StarRockLogMap.MapToCsv(entries),
+         ct);
+   }
    
    public async Task EnsureCreated(CancellationToken ct = default)
    {
       await using var connection = new MySqlConnection(Options.Telemetry.CreateStarRocksConnectionString());
       await connection.OpenAsync(ct);
-
-      const string createTableSql = 
-         """
+      
+      var createTableSql = 
+         $"""
          -- nosqlhighlight
-         CREATE TABLE IF NOT EXISTS log_entries (
+         CREATE TABLE IF NOT EXISTS {StarRockLogMap.TableName} (
             timestamp DATETIME NOT NULL,
             level TINYINT NOT NULL,
             message_template TEXT NOT NULL,

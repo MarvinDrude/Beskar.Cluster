@@ -11,8 +11,20 @@ public static class ServiceCollectionExtensions
    {
       public IServiceCollection AddBeskarClusterTelemtryDatabaseServices()
       {
+         services.AddHttpClient("StarRocks", _ =>
+         {
+            // nothing yet
+         }).ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler()
+         {
+            Expect100ContinueTimeout = TimeSpan.FromSeconds(10),
+            EnableMultipleHttp2Connections = true,
+            EnableMultipleHttp3Connections = true,
+            AllowAutoRedirect = true,
+         });
+         
          return services.AddScoped<TelemetryDatabaseCreator>()
-            .AddScoped<ILogService, StarRockLogService>();
+            .AddScoped<ILogService, StarRockLogService>()
+            .AddSingleton<StarRockSreamer>();
       }
    }
 }

@@ -12,4 +12,12 @@
      <ProjectReference Include="..\Beskar.Cluster.Logging.Module\Beskar.Cluster.Logging.Module.csproj" />
    </ItemGroup>
 
+   <ItemGroup>
+     <Content Update="appsettings.User.json.template">
+       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+     </Content>
+   </ItemGroup>
+
 </Project>

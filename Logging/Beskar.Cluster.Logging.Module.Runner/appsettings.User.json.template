@@ -1,0 +1,14 @@
+﻿{
+  "Main": {
+    "MainDatabaseConnectionString": "Host=localhost;Port=5432;Username=example;Password=example;Database=beskar_main",
+    "LoggingServerUrl": "ws://localhost:5212/loggingWebSocket",
+    "Telemetry": {
+      "HostName": "localhost",
+      "HttpPort": "8040",
+      "Port": "9030",
+      "DatabaseName": "beskar_telemetry",
+      "UserName": "root",
+      "Password": "root"
+    }
+  }
+}
