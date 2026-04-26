@@ -26,4 +26,10 @@ public readonly struct StructuredLogRecord
    
    [Key(3)]
    public required Dictionary<string, string?> Properties { get; init; }
+   
+   [Key(4)]
+   public required string? TraceId { get; init; }
+   
+   [Key(5)]
+   public required string? SpanId { get; init; }
 }

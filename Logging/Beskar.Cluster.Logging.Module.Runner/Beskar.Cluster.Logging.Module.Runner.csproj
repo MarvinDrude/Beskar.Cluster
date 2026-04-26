@@ -8,6 +8,7 @@
 
    <ItemGroup>
      <ProjectReference Include="..\..\Common\Beskar.Cluster.Configuration\Beskar.Cluster.Configuration.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Telemetry\Beskar.Cluster.Database.Telemetry.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Logging.Module\Beskar.Cluster.Logging.Module.csproj" />
    </ItemGroup>
 

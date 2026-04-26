@@ -55,7 +55,9 @@ public sealed class WebSocketBatchSink
          Timestamp = logEvent.Timestamp.UtcTicks,
          Level = (byte)logEvent.Level,
          MessageTemplate = logEvent.MessageTemplate.Text,
-         Properties = logEvent.Properties.ToDictionary(p => p.Key, p => p.Value.ToString())
+         Properties = logEvent.Properties.ToDictionary(p => p.Key, p => p.Value.ToString()),
+         SpanId = logEvent.TraceId?.ToHexString(),
+         TraceId = logEvent.TraceId?.ToHexString()
       };
    }
 }

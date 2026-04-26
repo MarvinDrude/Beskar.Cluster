@@ -2,6 +2,8 @@ using Beskar.Cluster.Configuration.Extensions;
 using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Extensions;
 using Beskar.Cluster.Database.Main.Contexts;
+using Beskar.Cluster.Database.Telemetry.Common;
+using Beskar.Cluster.Database.Telemetry.Extensions;
 using Beskar.Cluster.Database.Update;
 using Beskar.Cluster.Logging.Client.Extensions;
 using Beskar.Cluster.Logging.Module.Extensions;
@@ -14,6 +16,7 @@ builder.Services
    .AddBeskarClusterCommonSocketServices()
    .AddBeskarClusterServerLogging()
    .AddBeskarClusterClientLogging()
+   .AddBeskarClusterTelemtryDatabaseServices()
    .AddBeskarClusterCommonDatabaseServices()
    .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main);
 
@@ -21,6 +24,12 @@ builder.Configuration
    .SetupBeskarClusterConfiguration(builder, args);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+   var telemtryCreator = scope.ServiceProvider.GetRequiredService<TelemetryDatabaseCreator>();
+   await telemtryCreator.EnsureCreated();
+}
 
 await app.Services.InitializeSocketHandlers();
 
