@@ -14,4 +14,8 @@
      <ProjectReference Include="..\Beskar.Cluster.Logging.Protocol\Beskar.Cluster.Logging.Protocol.csproj" />
    </ItemGroup>
 
+   <ItemGroup>
+     <Folder Include="Network\" />
+   </ItemGroup>
+
 </Project>

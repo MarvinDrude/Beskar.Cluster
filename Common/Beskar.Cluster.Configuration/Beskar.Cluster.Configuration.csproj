@@ -14,4 +14,8 @@
      <PackageReference Include="Serilog.Sinks.Console" />
    </ItemGroup>
 
+   <ItemGroup>
+     <ProjectReference Include="..\..\Logging\Beskar.Cluster.Logging.Client\Beskar.Cluster.Logging.Client.csproj" />
+   </ItemGroup>
+
 </Project>

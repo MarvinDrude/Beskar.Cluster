@@ -3,6 +3,7 @@ using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Extensions;
 using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Update;
+using Beskar.Cluster.Logging.Client.Extensions;
 using Beskar.Cluster.Logging.Module.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.UseBeskarClusterLogging();
 
 builder.Services
    .AddBeskarClusterServerLogging()
+   .AddBeskarClusterClientLogging()
    .AddBeskarClusterCommonDatabaseServices()
    .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main);
 

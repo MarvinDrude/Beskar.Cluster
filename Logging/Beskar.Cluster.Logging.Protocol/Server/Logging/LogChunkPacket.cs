@@ -9,7 +9,7 @@ namespace Beskar.Cluster.Logging.Protocol.Server.Logging;
 public sealed class LogChunkPacket : IPacket
 {
    [Key(0)]
-   public required StructuredLogRecord[] Records { get; init; }
+   public required ArraySegment<StructuredLogRecord> Records { get; init; }
 }
 
 [MessagePackObject]
@@ -19,7 +19,11 @@ public readonly struct StructuredLogRecord
    public long Timestamp { get; init; }
    
    [Key(1)]
-   public int Level { get; init; }
+   public byte Level { get; init; }
    
+   [Key(2)]
+   public required string MessageTemplate { get; init; }
    
+   [Key(3)]
+   public required Dictionary<string, string> Properties { get; init; }
 }

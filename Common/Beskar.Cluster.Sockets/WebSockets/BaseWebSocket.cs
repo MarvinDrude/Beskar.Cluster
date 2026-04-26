@@ -15,7 +15,7 @@ public abstract class BaseWebSocket<TRegistry>(
    : IAsyncDisposable
    where TRegistry : BasePacketRegistry
 {
-   private WebSocket WebSocket { get; } = webSocket;
+   public WebSocket WebSocket { get; } = webSocket;
    private TRegistry Registry { get; } = registry;
 
    private Pipe Pipe { get; } = new();
