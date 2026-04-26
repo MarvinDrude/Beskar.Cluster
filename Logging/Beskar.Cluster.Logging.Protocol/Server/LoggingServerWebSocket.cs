@@ -6,7 +6,7 @@ namespace Beskar.Cluster.Logging.Protocol.Server;
 public sealed class LoggingServerWebSocket(
    WebSocket webSocket, 
    LoggingServerPacketRegistry registry) 
-   : BaseWebSocket<LoggingServerPacketRegistry>(webSocket, registry)
+   : BaseWebSocket<LoggingServerPacketRegistry, LoggingServerPacketState>(webSocket, registry)
 {
    
 }

@@ -19,7 +19,10 @@ public static class EndpointRouteBuilderExtensions
             }
             
             using var rawWebSocket = await context.WebSockets.AcceptWebSocketAsync();
-            var webSocket = new LoggingServerWebSocket(rawWebSocket, registry);
+            var webSocket = new LoggingServerWebSocket(rawWebSocket, registry)
+            {
+               State = new LoggingServerPacketState()
+            };
 
             await webSocket.StartProcessing();
             return 0;

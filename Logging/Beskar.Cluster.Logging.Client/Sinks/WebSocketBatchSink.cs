@@ -19,7 +19,10 @@ public sealed class WebSocketBatchSink
    {
       _uri = uri;
       _webSocket = new ClientWebSocket();
-      _client = new LoggingClientWebSocket(_webSocket, registry);
+      _client = new LoggingClientWebSocket(_webSocket, registry)
+      {
+         State = new LoggingClientPacketState()
+      };
    }
 
    public async Task EmitBatchAsync(IReadOnlyCollection<LogEvent> batch)

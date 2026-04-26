@@ -6,7 +6,7 @@ namespace Beskar.Cluster.Logging.Protocol.Client;
 public sealed class LoggingClientWebSocket(
    ClientWebSocket webSocket, 
    LoggingClientPacketRegistry registry) 
-   : BaseWebSocket<LoggingClientPacketRegistry>(webSocket, registry)
+   : BaseWebSocket<LoggingClientPacketRegistry, LoggingClientPacketState>(webSocket, registry)
 {
    
 }

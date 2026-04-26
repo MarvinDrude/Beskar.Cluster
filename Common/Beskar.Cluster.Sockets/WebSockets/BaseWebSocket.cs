@@ -9,12 +9,14 @@ using Me.Memory.Results.Errors;
 
 namespace Beskar.Cluster.Sockets.WebSockets;
 
-public abstract class BaseWebSocket<TRegistry>(
+public abstract class BaseWebSocket<TRegistry, TState>(
    WebSocket webSocket,
    TRegistry registry)
    : IAsyncDisposable
-   where TRegistry : BasePacketRegistry
+   where TRegistry : BasePacketRegistry<TState>
 {
+   public required TState State { get; init; }
+   
    public WebSocket WebSocket { get; } = webSocket;
    private TRegistry Registry { get; } = registry;
 
@@ -70,7 +72,8 @@ public abstract class BaseWebSocket<TRegistry>(
 
             while (true)
             {
-               var routeResult = await Registry.RoutePacket(buffer, ct);
+               var state = State;
+               var routeResult = await Registry.RoutePacket(ref state, buffer, ct);
 
                if (routeResult.ConsumedBytes > 0)
                {

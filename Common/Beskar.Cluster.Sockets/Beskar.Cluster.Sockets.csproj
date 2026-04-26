@@ -10,6 +10,7 @@
      <PackageReference Include="Beskar.CodeGeneration.PacketGenerator" />
      <PackageReference Include="Me.Memory" />
      <PackageReference Include="MessagePack" />
+     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
    </ItemGroup>
 
 </Project>

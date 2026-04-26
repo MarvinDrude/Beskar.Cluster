@@ -7,10 +7,10 @@ using MessagePack;
 
 namespace Beskar.Cluster.Sockets.Registries;
 
-public abstract class MessagePackPacketRegistry(
+public abstract class MessagePackPacketRegistry<TState>(
    MessagePackSerializerOptions? options = null,
    PacketRegistryOptions? registryOptions = null)
-   : BasePacketRegistry(registryOptions)
+   : BasePacketRegistry<TState>(registryOptions)
 {
    private readonly MessagePackSerializerOptions _options = options ?? _defaultOptions;
 

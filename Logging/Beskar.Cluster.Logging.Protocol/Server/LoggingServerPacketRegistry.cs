@@ -3,5 +3,10 @@ using Beskar.CodeGeneration.PacketGenerator.Marker.Attributes;
 
 namespace Beskar.Cluster.Logging.Protocol.Server;
 
-[PacketRegistry]
-public sealed partial class LoggingServerPacketRegistry : MessagePackPacketRegistry;
+[PacketRegistry<LoggingServerPacketState>]
+public sealed partial class LoggingServerPacketRegistry : MessagePackPacketRegistry<LoggingServerPacketState>;
+
+public sealed class LoggingServerPacketState
+{
+   
+}

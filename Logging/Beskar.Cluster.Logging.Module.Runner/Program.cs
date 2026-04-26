@@ -5,11 +5,13 @@ using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Update;
 using Beskar.Cluster.Logging.Client.Extensions;
 using Beskar.Cluster.Logging.Module.Extensions;
+using Beskar.Cluster.Sockets.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.UseBeskarClusterLogging();
 
 builder.Services
+   .AddBeskarClusterCommonSocketServices()
    .AddBeskarClusterServerLogging()
    .AddBeskarClusterClientLogging()
    .AddBeskarClusterCommonDatabaseServices()
@@ -19,6 +21,8 @@ builder.Configuration
    .SetupBeskarClusterConfiguration(builder, args);
 
 var app = builder.Build();
+
+await app.Services.InitializeSocketHandlers();
 
 var migrator = new MigrationRunner(app.Services);
 await migrator.TryMigrate();
