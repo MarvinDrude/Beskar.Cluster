@@ -48,14 +48,6 @@ await using (var scope = app.Services.CreateAsyncScope())
 {
    var localConfigCache = scope.ServiceProvider.GetRequiredService<LocalSystemConfigCache>();
    await localConfigCache.Refresh();
-   
-   await Task.Delay(TimeSpan.FromSeconds(10));
-
-   var client = scope.ServiceProvider.GetRequiredService<ISystemConfigClient>();
-   var value = client.GetValue<BooleanSystemConfig>(ConfigurationKeys.AccountIsSignInEnabled)!;
-
-   await scope.ServiceProvider.GetRequiredService<ISystemConfigClient>()
-      .SetValue(ConfigurationKeys.AccountIsSignInEnabled, value);
 }
 
 app.UseHttpsRedirection();

@@ -1,5 +1,9 @@
-﻿using Beskar.Cluster.Distributed.Client.Caches;
+﻿using Beskar.Cluster.Configuration.Config;
+using Beskar.Cluster.Configuration.Constants;
+using Beskar.Cluster.Distributed.Client.Caches;
 using Beskar.Cluster.Distributed.Client.Constants;
+using Beskar.Cluster.Distributed.Client.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
 
@@ -7,11 +11,13 @@ namespace Beskar.Cluster.Distributed.Client.Services;
 
 public sealed class SystemConfigHostedService(
    IConnectionMultiplexer connectionMultiplexer,
-   LocalSystemConfigCache localSystemConfigCache)
+   LocalSystemConfigCache localSystemConfigCache,
+   IServiceProvider serviceProvider)
    : IHostedService, IAsyncDisposable
 {
    private readonly IConnectionMultiplexer _connectionMultiplexer = connectionMultiplexer;
    private readonly LocalSystemConfigCache _localSystemConfigCache = localSystemConfigCache;
+   private readonly IServiceProvider _serviceProvider = serviceProvider;
    
    private CancellationTokenSource? _cts;
    private Task? _runningTask;
@@ -33,26 +39,21 @@ public sealed class SystemConfigHostedService(
    private async Task RunAsync(CancellationToken ct)
    {
       await _localSystemConfigCache.Refresh(ct);
-      
+
       var db = _connectionMultiplexer.GetSubscriber();
-      await db.SubscribeAsync(DistributedChannels.RefreshSystemConfigChannel, (c, v) =>
-      {
-         _ = "";
-      });
+      var channel = await db.SubscribeAsync(DistributedChannels.RefreshSystemConfigChannel);
 
       try
       {
-         await Task.Delay(Timeout.Infinite, ct);
+         await foreach (var _ in channel.WithCancellation(ct))
+         {
+            await _localSystemConfigCache.Refresh(ct);
+         }
       }
       catch (OperationCanceledException)
       {
          await db.UnsubscribeAsync(DistributedChannels.RefreshSystemConfigChannel);
       }
-      
-      // await foreach (var _ in queue.WithCancellation(ct))
-      // {
-      //    await _localSystemConfigCache.Refresh(ct);
-      // }
    }
 
    public async ValueTask DisposeAsync()
