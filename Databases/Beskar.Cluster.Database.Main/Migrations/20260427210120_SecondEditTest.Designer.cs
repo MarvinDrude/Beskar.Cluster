@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Beskar.Cluster.Database.Main.Migrations
 {
     [DbContext(typeof(DbMainContext))]
-    [Migration("20260427165150_ConfigAddType")]
-    partial class ConfigAddType
+    [Migration("20260427210120_SecondEditTest")]
+    partial class SecondEditTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,8 @@ namespace Beskar.Cluster.Database.Main.Migrations
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.Property<byte>("Type")
                         .HasColumnType("smallint");

@@ -1,3 +1,5 @@
+using Beskar.Cluster.Configuration.Config;
+using Beskar.Cluster.Configuration.Constants;
 using Beskar.Cluster.Configuration.Extensions;
 using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Extensions;
@@ -5,6 +7,9 @@ using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Telemetry.Common;
 using Beskar.Cluster.Database.Telemetry.Extensions;
 using Beskar.Cluster.Database.Update;
+using Beskar.Cluster.Distributed.Client.Caches;
+using Beskar.Cluster.Distributed.Client.Extensions;
+using Beskar.Cluster.Distributed.Client.Interfaces;
 using Beskar.Cluster.Logging.Client.Extensions;
 using Beskar.Cluster.Logging.Module.Extensions;
 using Beskar.Cluster.Sockets.Extensions;
@@ -12,20 +17,22 @@ using Beskar.Cluster.Sockets.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.UseBeskarClusterLogging();
 
+var options = builder.Configuration
+   .SetupBeskarClusterConfiguration(builder, args);
+
 builder.Services
    .AddBeskarClusterCommonSocketServices()
    .AddBeskarClusterServerLogging()
    .AddBeskarClusterClientLogging()
+   .AddBeskarClusterClientDistributed(options)
    .AddBeskarClusterTelemtryDatabaseServices()
    .AddBeskarClusterCommonDatabaseServices()
    .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main);
 
-builder.Configuration
-   .SetupBeskarClusterConfiguration(builder, args);
-
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+// pre migration runner
+await using (var scope = app.Services.CreateAsyncScope())
 {
    var telemtryCreator = scope.ServiceProvider.GetRequiredService<TelemetryDatabaseCreator>();
    await telemtryCreator.EnsureCreated();
@@ -35,6 +42,21 @@ await app.Services.InitializeSocketHandlers();
 
 var migrator = new MigrationRunner(app.Services);
 await migrator.TryMigrate();
+
+// post migration runner
+await using (var scope = app.Services.CreateAsyncScope())
+{
+   var localConfigCache = scope.ServiceProvider.GetRequiredService<LocalSystemConfigCache>();
+   await localConfigCache.Refresh();
+   
+   await Task.Delay(TimeSpan.FromSeconds(10));
+
+   var client = scope.ServiceProvider.GetRequiredService<ISystemConfigClient>();
+   var value = client.GetValue<BooleanSystemConfig>(ConfigurationKeys.AccountIsSignInEnabled)!;
+
+   await scope.ServiceProvider.GetRequiredService<ISystemConfigClient>()
+      .SetValue(ConfigurationKeys.AccountIsSignInEnabled, value);
+}
 
 app.UseHttpsRedirection();
 

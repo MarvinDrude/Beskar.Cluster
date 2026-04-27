@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Beskar.Cluster.Configuration.Config;
+using Beskar.Cluster.Configuration.Constants;
+using Beskar.Cluster.Database.Main.Enums.System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -16,6 +20,7 @@ public sealed class DbSystemConfigEntryConfiguration
    {
       builder.Property(e => e.Id)
          .HasConversion(KeyConverter)
+         .HasDefaultValueSql("gen_random_uuid()")
          .ValueGeneratedOnAdd();
 
       builder.HasKey(e => e.Key);
@@ -27,4 +32,20 @@ public sealed class DbSystemConfigEntryConfiguration
          .HasColumnType("jsonb")
          .IsRequired();
    }
+
+   public static DbSystemConfigEntry[] DefaultEntries { get; } =
+   [
+      new ()
+      {
+         Key = ConfigurationKeys.AccountIsSignInEnabled,
+         Type = SystemConfigType.Boolean,
+         Value = JsonSerializer.SerializeToElement(new SystemConfigValueWrapper<bool>(true))
+      },
+      new ()
+      {
+         Key = ConfigurationKeys.AccountIsSignUpEnabled,
+         Type = SystemConfigType.Boolean,
+         Value = JsonSerializer.SerializeToElement(new SystemConfigValueWrapper<bool>(true))
+      }
+   ];
 }

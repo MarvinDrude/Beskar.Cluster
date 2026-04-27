@@ -2,6 +2,7 @@
 using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Interfaces.Contexts;
 using Beskar.Cluster.Database.Main.Contexts;
+using Beskar.Cluster.Database.Main.Entities.System;
 using Beskar.Cluster.Database.Update.Postgres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,8 +35,20 @@ public sealed partial class MigrationRunner(IServiceProvider serviceProvider)
          var count = await mainContext.Database.GetPendingMigrationsAsync(ct);
          LogMigrationCount(DbContextKind.Main, count.Count());
       }
-
+      
       await mainContext.Database.MigrateAsync(ct);
+      
+      await SeedMainDatabase(mainContext, ct);
+      
       LogMigrationStop();
+   }
+
+   private async Task SeedMainDatabase(DbMainContext context, CancellationToken ct = default)
+   {
+      if (!await context.SystemConfigEntries.AnyAsync(ct))
+      {
+         await context.SystemConfigEntries.AddRangeAsync(DbSystemConfigEntryConfiguration.DefaultEntries, ct);
+         await context.SaveChangesAsync(ct);
+      }
    }
 }

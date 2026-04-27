@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Beskar.Cluster.Database.Main.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialConfigTable : Migration
+    public partial class SecondEdit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,7 @@ namespace Beskar.Cluster.Database.Main.Migrations
                 {
                     Key = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false),
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Type = table.Column<byte>(type: "smallint", nullable: false),
                     Value = table.Column<JsonElement>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>

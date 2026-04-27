@@ -35,6 +35,12 @@ public abstract class DbBaseContext(
       return ValueTask.CompletedTask;
    }
 
+   protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+   {
+      base.ConfigureConventions(configurationBuilder);
+      DbConventionBuilder.Configure(configurationBuilder, Kind);
+   }
+
    public override async ValueTask DisposeAsync()
    {
       await InvalidateState();

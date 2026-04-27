@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Beskar.Cluster.Database.Main.Migrations
 {
     [DbContext(typeof(DbMainContext))]
-    [Migration("20260425213138_InitialConfigTable")]
-    partial class InitialConfigTable
+    [Migration("20260427205511_SecondEdit")]
+    partial class SecondEdit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace Beskar.Cluster.Database.Main.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<byte>("Type")
+                        .HasColumnType("smallint");
 
                     b.Property<JsonElement>("Value")
                         .HasColumnType("jsonb");
