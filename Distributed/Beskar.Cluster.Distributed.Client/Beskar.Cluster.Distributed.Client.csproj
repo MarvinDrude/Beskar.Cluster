@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>net10.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <Folder Include="Services\" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <PackageReference Include="StackExchange.Redis" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\..\Common\Beskar.Cluster.Configuration\Beskar.Cluster.Configuration.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
+   </ItemGroup>
+
+</Project>

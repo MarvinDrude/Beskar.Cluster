@@ -24,7 +24,9 @@
     <Project Path="Databases/Beskar.Cluster.Database.Telemetry/Beskar.Cluster.Database.Telemetry.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Update/Beskar.Cluster.Database.Update.csproj" />
   </Folder>
-  <Folder Name="/Distributed/" />
+  <Folder Name="/Distributed/">
+    <Project Path="Distributed/Beskar.Cluster.Distributed.Client/Beskar.Cluster.Distributed.Client.csproj" />
+  </Folder>
   <Folder Name="/Experiments/">
     <Project Path="Experiments/Beskar.Cluster.Experiment/Beskar.Cluster.Experiment.csproj" />
   </Folder>

@@ -25,7 +25,7 @@ public readonly struct StructuredLogRecord
    public required string MessageTemplate { get; init; }
    
    [Key(3)]
-   public required Dictionary<string, string?> Properties { get; init; }
+   public required Dictionary<string, string> Properties { get; init; }
    
    [Key(4)]
    public required string? TraceId { get; init; }
