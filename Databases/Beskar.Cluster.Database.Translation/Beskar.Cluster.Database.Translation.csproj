@@ -14,4 +14,8 @@
      <ProjectReference Include="..\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
    </ItemGroup>
 
+   <ItemGroup>
+     <PackageReference Include="Beskar.CodeGeneration.TypeIdGenerator.Marker" />
+   </ItemGroup>
+
 </Project>
