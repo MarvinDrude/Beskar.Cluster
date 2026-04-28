@@ -93,8 +93,13 @@ public abstract class DbBaseContext(
       {
          if (typeof(IEntitySoftDeletable).IsAssignableFrom(entity.ClrType))
          {
-            modelBuilder.Entity(entity.ClrType)
+            var entityType = modelBuilder.Entity(entity.ClrType);
+            
+            entityType
                .HasQueryFilter(CreateSoftDeleteFilter(entity.ClrType));
+            entityType
+               .HasIndex(nameof(IEntitySoftDeletable.IsDeleted))
+               .HasFilter($@"""{nameof(IEntitySoftDeletable.IsDeleted)}"" = FALSE");
          }
       }
    }

@@ -3,6 +3,7 @@ using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Interfaces.Contexts;
 using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Main.Entities.System;
+using Beskar.Cluster.Database.Translation.Contexts;
 using Beskar.Cluster.Database.Update.Postgres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,16 +28,8 @@ public sealed partial class MigrationRunner(IServiceProvider serviceProvider)
 
       LogLockAcquired();
       
-      var mainContextProvider = scope.ServiceProvider.GetRequiredService<DbContextProvider<DbMainContext>>();
-      var mainContext = await mainContextProvider.GetContextAsync(ct);
-
-      if (_logger.IsEnabled(LogLevel.Information))
-      {
-         var count = await mainContext.Database.GetPendingMigrationsAsync(ct);
-         LogMigrationCount(DbContextKind.Main, count.Count());
-      }
-      
-      await mainContext.Database.MigrateAsync(ct);
+      var translationContext = await MigrateDatabase<DbTranslationContext>(scope, DbContextKind.Translation, ct);
+      var mainContext = await MigrateDatabase<DbMainContext>(scope, DbContextKind.Main, ct);
       
       await SeedMainDatabase(mainContext, ct);
       
@@ -50,5 +43,21 @@ public sealed partial class MigrationRunner(IServiceProvider serviceProvider)
          await context.SystemConfigEntries.AddRangeAsync(DbSystemConfigEntryConfiguration.DefaultEntries, ct);
          await context.SaveChangesAsync(ct);
       }
+   }
+
+   private async Task<TContext> MigrateDatabase<TContext>(IServiceScope scope, DbContextKind kind, CancellationToken ct = default)
+      where TContext : DbBaseContext
+   {
+      var contextProvider = scope.ServiceProvider.GetRequiredService<DbContextProvider<TContext>>();
+      var context = await contextProvider.GetContextAsync(ct);
+
+      if (_logger.IsEnabled(LogLevel.Information))
+      {
+         var count = await context.Database.GetPendingMigrationsAsync(ct);
+         LogMigrationCount(kind, count.Count());
+      }
+      
+      await context.Database.MigrateAsync(ct);
+      return context;
    }
 }

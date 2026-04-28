@@ -4,6 +4,7 @@ using Beskar.Cluster.Database.Common.Extensions;
 using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Telemetry.Common;
 using Beskar.Cluster.Database.Telemetry.Extensions;
+using Beskar.Cluster.Database.Translation.Contexts;
 using Beskar.Cluster.Database.Update;
 using Beskar.Cluster.Distributed.Client.Caches;
 using Beskar.Cluster.Distributed.Client.Extensions;
@@ -24,7 +25,8 @@ builder.Services
    .AddBeskarClusterClientDistributed(options)
    .AddBeskarClusterTelemtryDatabaseServices()
    .AddBeskarClusterCommonDatabaseServices()
-   .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main);
+   .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main)
+   .AddBeskarClusterDatabaseServices<DbTranslationContext, DbTranslationContextFactory>(DbContextKind.Translation);
 
 var app = builder.Build();
 

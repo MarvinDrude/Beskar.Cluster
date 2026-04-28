@@ -9,6 +9,8 @@ public sealed partial class DbTranslationContext
    
    public DbSet<DbLangGroup> LangGroups => Set<DbLangGroup>();
    
+   public DbSet<DbLangKey> LangKeys => Set<DbLangKey>();
+   
    public DbSet<DbLangEntry> LangEntries => Set<DbLangEntry>();
    
    protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,6 +20,8 @@ public sealed partial class DbTranslationContext
       modelBuilder.ApplyConfiguration(new DbLanguageConfiguration());
       
       modelBuilder.ApplyConfiguration(new DbLangGroupConfiguration());
+      
+      modelBuilder.ApplyConfiguration(new DbLangKeyConfiguration());
       
       modelBuilder.ApplyConfiguration(new DbLangEntryConfiguration());
    }

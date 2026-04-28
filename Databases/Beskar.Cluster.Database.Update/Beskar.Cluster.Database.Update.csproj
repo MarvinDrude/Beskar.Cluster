@@ -13,6 +13,7 @@
    <ItemGroup>
      <ProjectReference Include="..\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Database.Translation\Beskar.Cluster.Database.Translation.csproj" />
    </ItemGroup>
 
 </Project>
