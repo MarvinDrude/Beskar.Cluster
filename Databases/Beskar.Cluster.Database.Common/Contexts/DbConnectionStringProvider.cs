@@ -16,6 +16,7 @@ public sealed class DbConnectionStringProvider(IOptionsMonitor<MainOptions> opti
       return new ValueTask<string>(kind switch
       {
          DbContextKind.Main => Options.MainDatabaseConnectionString,
+         DbContextKind.Translation => Options.TranslationConnectionString,
          DbContextKind.Unknown => throw new InvalidOperationException($"Invalid DbContextKind: {kind}"),
          _ => throw new InvalidOperationException($"Invalid DbContextKind: {kind}")
       });

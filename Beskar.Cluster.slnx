@@ -17,11 +17,13 @@
   <Folder Name="/Common/">
     <Project Path="Common/Beskar.Cluster.Configuration/Beskar.Cluster.Configuration.csproj" />
     <Project Path="Common/Beskar.Cluster.Sockets/Beskar.Cluster.Sockets.csproj" />
+    <Project Path="Common/Beskar.Cluster.Translation/Beskar.Cluster.Translation.csproj" />
   </Folder>
   <Folder Name="/Databases/">
     <Project Path="Databases/Beskar.Cluster.Database.Common/Beskar.Cluster.Database.Common.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Main/Beskar.Cluster.Database.Main.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Telemetry/Beskar.Cluster.Database.Telemetry.csproj" />
+    <Project Path="Databases/Beskar.Cluster.Database.Translation/Beskar.Cluster.Database.Translation.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Update/Beskar.Cluster.Database.Update.csproj" />
   </Folder>
   <Folder Name="/Distributed/">
