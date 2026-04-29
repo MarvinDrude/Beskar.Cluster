@@ -45,7 +45,7 @@ public sealed partial class MigrationRunner(IServiceProvider serviceProvider)
       }
    }
 
-   private async Task<TContext> MigrateDatabase<TContext>(IServiceScope scope, DbContextKind kind, CancellationToken ct = default)
+   private async Task<TContext> MigrateDatabase<TContext>(AsyncServiceScope scope, DbContextKind kind, CancellationToken ct = default)
       where TContext : DbBaseContext
    {
       var contextProvider = scope.ServiceProvider.GetRequiredService<DbContextProvider<TContext>>();

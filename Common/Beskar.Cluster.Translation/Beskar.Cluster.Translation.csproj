@@ -6,4 +6,18 @@
       <Nullable>enable</Nullable>
    </PropertyGroup>
 
+   <ItemGroup>
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Translation\Beskar.Cluster.Database.Translation.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Translation.Abstractions\Beskar.Cluster.Translation.Abstractions.csproj" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <Folder Include="Detectors\" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <PackageReference Include="Beskar.CodeGeneration.LanguageGenerator.Marker" />
+   </ItemGroup>
+
 </Project>

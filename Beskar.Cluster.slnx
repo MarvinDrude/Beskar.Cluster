@@ -17,6 +17,7 @@
   <Folder Name="/Common/">
     <Project Path="Common/Beskar.Cluster.Configuration/Beskar.Cluster.Configuration.csproj" />
     <Project Path="Common/Beskar.Cluster.Sockets/Beskar.Cluster.Sockets.csproj" />
+    <Project Path="Common/Beskar.Cluster.Translation.Abstractions/Beskar.Cluster.Translation.Abstractions.csproj" />
     <Project Path="Common/Beskar.Cluster.Translation/Beskar.Cluster.Translation.csproj" />
   </Folder>
   <Folder Name="/Databases/">
