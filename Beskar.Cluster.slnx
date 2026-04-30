@@ -20,6 +20,9 @@
     <Project Path="Common/Beskar.Cluster.Translation.Abstractions/Beskar.Cluster.Translation.Abstractions.csproj" />
     <Project Path="Common/Beskar.Cluster.Translation/Beskar.Cluster.Translation.csproj" />
   </Folder>
+  <Folder Name="/Content/">
+    <Project Path="Content/Beskar.Cluster.Markdown/Beskar.Cluster.Markdown.csproj" />
+  </Folder>
   <Folder Name="/Databases/">
     <Project Path="Databases/Beskar.Cluster.Database.Common/Beskar.Cluster.Database.Common.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Main/Beskar.Cluster.Database.Main.csproj" />
