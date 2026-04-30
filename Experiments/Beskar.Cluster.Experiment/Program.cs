@@ -9,7 +9,15 @@ var res = MarkdownLexResult.Create(
    > Welt
    > A
    
+   Hier `aaa` toll?
+   
    Wie geht es dir?
+   
+   ```csharp
+   class Program 
+   {
+   }
+   ```
    
    ## s
    ### a
@@ -20,5 +28,7 @@ var res = MarkdownLexResult.Create(
    **Bold**
    """);
 var debugString = res.CreateDebugString();
+
+var html = res.CreateHtml(new object());
 
 _ = "";

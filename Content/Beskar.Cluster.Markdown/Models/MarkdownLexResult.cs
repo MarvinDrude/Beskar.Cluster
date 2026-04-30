@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Beskar.Cluster.Markdown.Enums;
+using Beskar.Cluster.Markdown.Html;
 using Beskar.Cluster.Markdown.Parsing;
 using Me.Memory.Buffers;
 
@@ -12,6 +13,28 @@ public sealed class MarkdownLexResult
    
    public required MarkdownToken[] Tokens { get; init; }
 
+   public void WriteHtml<TContext>(TContext context, ref TextWriterIndentSlim writer, MarkdownHtml<TContext>? host = null)
+   {
+      host ??= new MarkdownHtml<TContext>();
+
+      var reader = new MarkdownReader(Tokens, RawText);
+      host.Write(context, ref reader, ref writer);
+   }
+
+   public string CreateHtml<TContext>(TContext context, MarkdownHtml<TContext>? host = null)
+   {
+      var writer = new TextWriterIndentSlim(stackalloc char[512], stackalloc char[16]);
+      try
+      {
+         WriteHtml(context, ref writer, host);
+         return writer.ToString();
+      }
+      finally
+      {
+         writer.Dispose();
+      }
+   }
+   
    public static MarkdownLexResult Create(string rawText)
    {
       var lexer = new MarkdownLexer(rawText, stackalloc MarkdownToken[128]);

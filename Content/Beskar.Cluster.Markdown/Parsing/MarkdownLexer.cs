@@ -70,6 +70,7 @@ public ref struct MarkdownLexer(
             
             case '>' when isStartOfLine:
                _currentPosition++;
+               if (Peek(0) == ' ') _currentPosition++;
                AddToken(MarkdownTokenType.BlockQuote, start);
                continue;
             
@@ -154,7 +155,7 @@ public ref struct MarkdownLexer(
    
       if (Peek(count) == ' ')
       {
-         _currentPosition += count; 
+         _currentPosition += count + 1; 
          var type = (MarkdownTokenType)((int)MarkdownTokenType.Heading1 + (count - 1));
          AddToken(type, start);
       }

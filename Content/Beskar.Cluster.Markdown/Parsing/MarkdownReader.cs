@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Beskar.Cluster.Markdown.Enums;
 using Beskar.Cluster.Markdown.Models;
 
 namespace Beskar.Cluster.Markdown.Parsing;
@@ -29,6 +30,7 @@ public ref struct MarkdownReader(
    public MarkdownToken Peek()
    {
       return _index + 1 < _tokens.Length 
-         ? _tokens[_index + 1] : default;
+         ? _tokens[_index + 1] 
+         : new MarkdownToken(MarkdownTokenType.None, new RawMarkdownPosition(0, 0));
    }
 }

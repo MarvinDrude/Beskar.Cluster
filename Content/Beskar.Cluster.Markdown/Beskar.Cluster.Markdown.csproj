@@ -10,8 +10,4 @@
      <PackageReference Include="Me.Memory" />
    </ItemGroup>
 
-   <ItemGroup>
-     <Folder Include="Html\Default\" />
-   </ItemGroup>
-
 </Project>
