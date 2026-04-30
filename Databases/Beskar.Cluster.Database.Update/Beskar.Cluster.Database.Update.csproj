@@ -11,6 +11,7 @@
    </ItemGroup>
 
    <ItemGroup>
+     <ProjectReference Include="..\..\Common\Beskar.Cluster.Translation.Abstractions\Beskar.Cluster.Translation.Abstractions.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Database.Translation\Beskar.Cluster.Database.Translation.csproj" />

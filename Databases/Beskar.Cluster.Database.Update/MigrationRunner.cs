@@ -5,6 +5,7 @@ using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Main.Entities.System;
 using Beskar.Cluster.Database.Translation.Contexts;
 using Beskar.Cluster.Database.Update.Postgres;
+using Beskar.Cluster.Database.Update.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,18 +32,24 @@ public sealed partial class MigrationRunner(IServiceProvider serviceProvider)
       var translationContext = await MigrateDatabase<DbTranslationContext>(scope, DbContextKind.Translation, ct);
       var mainContext = await MigrateDatabase<DbMainContext>(scope, DbContextKind.Main, ct);
       
-      await SeedMainDatabase(mainContext, ct);
+      await SeedMainDatabase(scope, mainContext, ct);
+      await SeedTranslationDatabase(scope, translationContext, ct);
       
       LogMigrationStop();
    }
 
-   private async Task SeedMainDatabase(DbMainContext context, CancellationToken ct = default)
+   private async Task SeedMainDatabase(AsyncServiceScope scope, DbMainContext context, CancellationToken ct = default)
    {
       if (!await context.SystemConfigEntries.AnyAsync(ct))
       {
          await context.SystemConfigEntries.AddRangeAsync(DbSystemConfigEntryConfiguration.DefaultEntries, ct);
          await context.SaveChangesAsync(ct);
       }
+   }
+
+   private async Task SeedTranslationDatabase(AsyncServiceScope scope, DbTranslationContext context, CancellationToken ct = default)
+   {
+      await TranslationSeedRunner.Seed(scope, context, ct);
    }
 
    private async Task<TContext> MigrateDatabase<TContext>(AsyncServiceScope scope, DbContextKind kind, CancellationToken ct = default)
