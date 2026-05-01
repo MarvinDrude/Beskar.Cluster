@@ -1,4 +1,5 @@
 ﻿using Beskar.Cluster.Database.Main.Entities.Account;
+using Beskar.Cluster.Database.Main.Entities.Projects;
 using Beskar.Cluster.Database.Main.Entities.System;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,12 @@ public sealed partial class DbMainContext
    public DbSet<DbAccountExternal> AccountExternals => Set<DbAccountExternal>();
    public DbSet<DbAccountBackupCode> AccountBackupCodes => Set<DbAccountBackupCode>();
    
+   public DbSet<DbProject> Projects => Set<DbProject>();
+   public DbSet<DbProjectMember> ProjectMembers => Set<DbProjectMember>();
+   public DbSet<DbProjectInvitation> ProjectInvitations => Set<DbProjectInvitation>();
+   public DbSet<DbProjectRole> ProjectRoles => Set<DbProjectRole>();
+   public DbSet<DbProjectRolePermission> ProjectRolePermissions => Set<DbProjectRolePermission>();
+   
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
       base.OnModelCreating(modelBuilder);
@@ -27,5 +34,11 @@ public sealed partial class DbMainContext
       modelBuilder.ApplyConfiguration(new DbAccountSecurityTokenConfiguration());
       modelBuilder.ApplyConfiguration(new DbAccountExternalConfiguration());
       modelBuilder.ApplyConfiguration(new DbAccountBackupCodeConfiguration());
+      
+      modelBuilder.ApplyConfiguration(new DbProjectConfiguration());
+      modelBuilder.ApplyConfiguration(new DbProjectMemberConfiguration());
+      modelBuilder.ApplyConfiguration(new DbProjectInvitationConfiguration());
+      modelBuilder.ApplyConfiguration(new DbProjectRoleConfiguration());
+      modelBuilder.ApplyConfiguration(new DbProjectRolePermissionConfiguration());
    }
 }

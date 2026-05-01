@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Beskar.Cluster.Database.Common.Constants;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -15,7 +16,7 @@ public sealed class DbAccountBackupCodeConfiguration : IEntityTypeConfiguration<
    {
       builder.Property(e => e.Id)
          .HasConversion(KeyConverter)
-         .HasDefaultValueSql("uuidv7()")
+         .HasDefaultValueSql(DbConstants.DefaultIdGenerator)
          .ValueGeneratedOnAdd();
       
       builder.Property(x => x.CodeHash)

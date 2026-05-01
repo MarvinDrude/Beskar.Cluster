@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Beskar.Cluster.Configuration.Config;
 using Beskar.Cluster.Configuration.Constants;
+using Beskar.Cluster.Database.Common.Constants;
 using Beskar.Cluster.Database.Main.Enums.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -20,7 +21,7 @@ public sealed class DbSystemConfigEntryConfiguration
    {
       builder.Property(e => e.Id)
          .HasConversion(KeyConverter)
-         .HasDefaultValueSql("uuidv7()")
+         .HasDefaultValueSql(DbConstants.DefaultIdGenerator)
          .ValueGeneratedOnAdd();
 
       builder.HasKey(e => e.Key);
