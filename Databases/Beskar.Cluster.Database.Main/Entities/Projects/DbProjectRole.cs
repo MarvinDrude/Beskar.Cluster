@@ -1,4 +1,5 @@
 ﻿using Beskar.Cluster.Database.Common.Entities;
+using Beskar.CodeGeneration.TypeIdGenerator.Marker.Attributes;
 
 namespace Beskar.Cluster.Database.Main.Entities.Projects;
 
@@ -17,4 +18,5 @@ public sealed class DbProjectRole : BaseEntity
    public List<DbProjectRolePermission> Permissions => field ??= [];
 }
 
+[TypeSafeId]
 public readonly partial record struct DbProjectRoleId(Guid Value);

@@ -88,6 +88,7 @@ public abstract class DbBaseContext(
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
       base.OnModelCreating(modelBuilder);
+      modelBuilder.HasPostgresExtension("pg_trgm");
 
       foreach (var entity in modelBuilder.Model.GetEntityTypes())
       {

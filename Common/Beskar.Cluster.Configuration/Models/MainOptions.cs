@@ -13,6 +13,11 @@ public sealed class MainOptions
    public required string TranslationConnectionString { get; set; }
    
    /// <summary>
+   /// Example: Server=localhost;Database=FileDatabase;User Id=sa;Password=;
+   /// </summary>
+   public required string FileConnectionString { get; set; }
+   
+   /// <summary>
    /// Example: ws://localhost:5000
    /// </summary>
    public required string LoggingServerUrl { get; set; }

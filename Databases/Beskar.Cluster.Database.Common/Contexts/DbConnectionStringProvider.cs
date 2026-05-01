@@ -17,6 +17,7 @@ public sealed class DbConnectionStringProvider(IOptionsMonitor<MainOptions> opti
       {
          DbContextKind.Main => Options.MainDatabaseConnectionString,
          DbContextKind.Translation => Options.TranslationConnectionString,
+         DbContextKind.File => Options.FileConnectionString,
          DbContextKind.Unknown => throw new InvalidOperationException($"Invalid DbContextKind: {kind}"),
          _ => throw new InvalidOperationException($"Invalid DbContextKind: {kind}")
       });

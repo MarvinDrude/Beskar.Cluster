@@ -1,6 +1,7 @@
 using Beskar.Cluster.Configuration.Extensions;
 using Beskar.Cluster.Database.Common.Enums;
 using Beskar.Cluster.Database.Common.Extensions;
+using Beskar.Cluster.Database.File.Contexts;
 using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Telemetry.Common;
 using Beskar.Cluster.Database.Telemetry.Extensions;
@@ -26,7 +27,8 @@ builder.Services
    .AddBeskarClusterTelemtryDatabaseServices()
    .AddBeskarClusterCommonDatabaseServices()
    .AddBeskarClusterDatabaseServices<DbMainContext, DbMainContextFactory>(DbContextKind.Main)
-   .AddBeskarClusterDatabaseServices<DbTranslationContext, DbTranslationContextFactory>(DbContextKind.Translation);
+   .AddBeskarClusterDatabaseServices<DbTranslationContext, DbTranslationContextFactory>(DbContextKind.Translation)
+   .AddBeskarClusterDatabaseServices<DbFileContext, DbFileContextFactory>(DbContextKind.File);
 
 var app = builder.Build();
 

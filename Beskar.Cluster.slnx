@@ -25,6 +25,7 @@
   </Folder>
   <Folder Name="/Databases/">
     <Project Path="Databases/Beskar.Cluster.Database.Common/Beskar.Cluster.Database.Common.csproj" />
+    <Project Path="Databases/Beskar.Cluster.Database.File/Beskar.Cluster.Database.File.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Main/Beskar.Cluster.Database.Main.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Telemetry/Beskar.Cluster.Database.Telemetry.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Translation/Beskar.Cluster.Database.Translation.csproj" />

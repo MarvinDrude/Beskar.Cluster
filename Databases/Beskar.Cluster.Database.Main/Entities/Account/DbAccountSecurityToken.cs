@@ -1,5 +1,6 @@
 ﻿using Beskar.Cluster.Database.Common.Entities;
 using Beskar.Cluster.Database.Main.Enums.Account;
+using Beskar.CodeGeneration.TypeIdGenerator.Marker.Attributes;
 
 namespace Beskar.Cluster.Database.Main.Entities.Account;
 
@@ -17,4 +18,5 @@ public sealed class DbAccountSecurityToken : BaseEntity
    public DbAccount? Account { get; set; }
 }
 
+[TypeSafeId]
 public readonly partial record struct DbAccountSecurityTokenId(Guid Value);

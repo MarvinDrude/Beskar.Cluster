@@ -1,5 +1,6 @@
 ﻿using Beskar.Cluster.Database.Common.Entities;
 using Beskar.Cluster.Database.Main.Entities.Account;
+using Beskar.CodeGeneration.TypeIdGenerator.Marker.Attributes;
 
 namespace Beskar.Cluster.Database.Main.Entities.Projects;
 
@@ -26,4 +27,5 @@ public sealed class DbProjectInvitation : BaseEntity
    public DbProjectRole? Role { get; set; }
 }
 
+[TypeSafeId]
 public readonly partial record struct DbProjectInvitationId(Guid Value);

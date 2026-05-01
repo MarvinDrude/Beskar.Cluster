@@ -1,4 +1,5 @@
 ﻿using Beskar.Cluster.Database.Common.Entities;
+using Beskar.CodeGeneration.TypeIdGenerator.Marker.Attributes;
 
 namespace Beskar.Cluster.Database.Translation.Entities.Common;
 
@@ -15,4 +16,5 @@ public class DbLangEntry : BaseEntity
    public DbLanguage? Language { get; set; }
 }
 
-public readonly record struct DbLangEntryId(Guid Value);
+[TypeSafeId]
+public readonly partial record struct DbLangEntryId(Guid Value);
