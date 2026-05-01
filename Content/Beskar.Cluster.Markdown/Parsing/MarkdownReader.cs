@@ -10,6 +10,7 @@ public ref struct MarkdownReader(
 {
    public MarkdownToken Current => _tokens[_index];
    public ReadOnlySpan<char> Value => _source.Slice(Current.ValuePostion.Index, Current.ValuePostion.Length);
+   public ReadOnlySpan<char> Source => _source;
    
    private int _index = -1;
    

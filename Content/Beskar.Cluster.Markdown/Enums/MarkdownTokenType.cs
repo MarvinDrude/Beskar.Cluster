@@ -18,7 +18,9 @@ public enum MarkdownTokenType : byte
    CodeBlock,
    UnorderedList,
    OrderedList,
+   ListItem,
    HorizontalRule,
+   Paragraph,
    
    // Inlines
    Text,
@@ -35,4 +37,5 @@ public enum MarkdownTokenType : byte
    // Custom
    CustomTagOpen,
    CustomTagClose,
+   Metadata
 }

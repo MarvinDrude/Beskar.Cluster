@@ -4,31 +4,40 @@ Console.WriteLine("Hello, World!");
 
 var res = MarkdownLexResult.Create(
    """
-   Hallo
    ---
-   > Welt
-   > A
+   # Header with **Bold** and `Code`
    
-   Hier `aaa` toll?
+   > Blockquote start
+   > > Nested Blockquote
+   > > 1. List inside quote
+   > > 2. Second item
+   > Back to first level
    
-   Wie geht es dir?
+   - aa
+   - dsa
    
-   ```csharp
-   class Program 
-   {
-   }
+   * aaaaa
+   * bbb
+   
+   ```typescript
+   // Testing your new CodeBlock logic
+   const x = "No **Markdown** parsing here";
    ```
+   1. Item with nested list
+   2. Item with [Link](https://example.com)
    
-   ## s
-   ### a
+   Text with *Italic* and **Bold** and ***Both***.
+   An empty block follows:
    
-   1. s
-   2. s
+   > 
    
-   **Bold**
+   ## Mixed Inlines [Link] `Code` **Bold**
+   
+   ---
    """);
 var debugString = res.CreateDebugString();
+var astResult = MarkdownAstResult.Create(res);
+var astDebugString = astResult.CreateDebugString();
 
-var html = res.CreateHtml(new object());
 
 _ = "";

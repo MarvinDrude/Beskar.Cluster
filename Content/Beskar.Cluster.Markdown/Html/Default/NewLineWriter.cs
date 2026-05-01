@@ -17,9 +17,9 @@ internal sealed class NewLineWriter<TContext> : IMarkdownHtmlWriter<TContext>
          reader.Read();
       }
       
-      if (host.BlockType is BlockType.None)
+      if (host.BlockType is MarkdownTokenType.None)
       {
-         writer.Write("<br/>");
+         writer.Write("<br/>\n");
       }
       else
       {

@@ -8,5 +8,5 @@ public sealed class MarkdownHtmlContext<TContext>
    
    public required TContext Context { get; init; }
 
-   internal BlockType BlockType { get; set; } = BlockType.None;
+   internal MarkdownTokenType BlockType { get; set; } = MarkdownTokenType.None;
 }

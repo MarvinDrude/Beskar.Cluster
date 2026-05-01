@@ -14,7 +14,7 @@ internal sealed class TextWriter<TContext> : IMarkdownTextWriter<TContext>
       ref MarkdownReader reader, 
       ref TextWriterIndentSlim writer)
    {
-      if (host.BlockType is BlockType.None && !IsParagraphOpen)
+      if (host.BlockType is MarkdownTokenType.None && !IsParagraphOpen)
       {
          writer.WriteLine("<p>");
          IsParagraphOpen = true;

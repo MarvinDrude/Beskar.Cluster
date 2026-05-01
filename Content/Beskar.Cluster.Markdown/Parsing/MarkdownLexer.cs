@@ -122,7 +122,13 @@ public ref struct MarkdownLexer(
                continue;
             
             default:
+               var prevPos = _currentPosition;
                HandleText(start);
+               if (_currentPosition == prevPos) // safeguard against endless loop
+               {
+                  _currentPosition++;
+                  AddToken(MarkdownTokenType.Text, start);
+               }
                continue;
          }
       }
@@ -168,10 +174,19 @@ public ref struct MarkdownLexer(
    [MethodImpl(MethodImplOptions.AggressiveInlining)]
    private void HandleText(int start)
    {
+      if (_currentPosition < _rawInput.Length 
+          && IsControlChar(_rawInput[_currentPosition]))
+      {
+         // make sure
+         _currentPosition++;
+      }
+      
       while (_currentPosition < _rawInput.Length)
       {
          if (IsControlChar(_rawInput[_currentPosition]))
+         {
             break;
+         }
       
          _currentPosition++;
       }
@@ -183,7 +198,30 @@ public ref struct MarkdownLexer(
    private void HandleCodeBlock(int start)
    {
       _currentPosition += 3;
+      
+      while (_currentPosition < _rawInput.Length)
+      {
+         if (IsClosingCodeBlock())
+         {
+            _currentPosition += 3;
+            break;
+         }
+         _currentPosition++;
+      }
+      
       AddToken(MarkdownTokenType.CodeBlock, start);
+   }
+   
+   [MethodImpl(MethodImplOptions.AggressiveInlining)]
+   private bool IsClosingCodeBlock()
+   {
+      var isStartOfLine = _currentPosition > 0 
+         && (_rawInput[_currentPosition - 1] == '\n' || _rawInput[_currentPosition - 1] == '\r');
+   
+      return isStartOfLine && 
+             Peek(0) == '`' && 
+             Peek(1) == '`' && 
+             Peek(2) == '`';
    }
 
    [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -228,7 +266,6 @@ public ref struct MarkdownLexer(
       return cha switch
       {
          '#' or '*' or '_' or '[' or ']' or '(' or ')' or '!' or '`' or '>' or '\n' or '\r' => true,
-         '0' or '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' => true,
          _ => false
       };
    }
