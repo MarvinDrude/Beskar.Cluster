@@ -13,6 +13,16 @@ public sealed class DbAccountMultiFactorConfiguration : IEntityTypeConfiguration
    
    public void Configure(EntityTypeBuilder<DbAccountMultiFactor> builder)
    {
-      throw new NotImplementedException();
+      builder.Property(e => e.Id)
+         .HasConversion(KeyConverter)
+         .HasDefaultValueSql("uuidv7()")
+         .ValueGeneratedOnAdd();
+      
+      builder.Property(e => e.Secret)
+         .HasMaxLength(2048);
+      
+      builder.HasOne(e => e.Account)
+         .WithMany(e => e.MultiFactors)
+         .HasForeignKey(e => e.AccountId);
    }
 }

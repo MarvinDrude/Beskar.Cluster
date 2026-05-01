@@ -13,6 +13,19 @@ public sealed class DbAccountBackupCodeConfiguration : IEntityTypeConfiguration<
    
    public void Configure(EntityTypeBuilder<DbAccountBackupCode> builder)
    {
-      throw new NotImplementedException();
+      builder.Property(e => e.Id)
+         .HasConversion(KeyConverter)
+         .HasDefaultValueSql("uuidv7()")
+         .ValueGeneratedOnAdd();
+      
+      builder.Property(x => x.CodeHash)
+         .HasMaxLength(2048);
+      
+      builder.Property(x => x.UsedByIpAddress)
+         .HasMaxLength(512);
+
+      builder.HasOne(x => x.Account)
+         .WithMany(x => x.BackupCodes)
+         .HasForeignKey(x => x.AccountId);
    }
 }

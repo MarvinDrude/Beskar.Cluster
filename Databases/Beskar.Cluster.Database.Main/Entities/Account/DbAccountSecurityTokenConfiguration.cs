@@ -13,6 +13,16 @@ public sealed class DbAccountSecurityTokenConfiguration : IEntityTypeConfigurati
    
    public void Configure(EntityTypeBuilder<DbAccountSecurityToken> builder)
    {
-      throw new NotImplementedException();
+      builder.Property(e => e.Id)
+         .HasConversion(KeyConverter)
+         .HasDefaultValueSql("uuidv7()")
+         .ValueGeneratedOnAdd();
+      
+      builder.Property(e => e.TokenHash)
+         .HasMaxLength(2048);
+      
+      builder.HasOne(e => e.Account)
+         .WithMany(e => e.SecurityTokens)
+         .HasForeignKey(e => e.AccountId);
    }
 }

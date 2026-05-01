@@ -13,6 +13,19 @@ public sealed class DbAccountExternalConfiguration : IEntityTypeConfiguration<Db
    
    public void Configure(EntityTypeBuilder<DbAccountExternal> builder)
    {
-      throw new NotImplementedException();
+      builder.Property(e => e.Id)
+         .HasConversion(KeyConverter)
+         .HasDefaultValueSql("uuidv7()")
+         .ValueGeneratedOnAdd();
+      
+      builder.Property(x => x.ProviderKey)
+         .HasMaxLength(256);
+
+      builder.Property(x => x.UserId)
+         .HasMaxLength(512);
+      
+      builder.HasOne(x => x.Account)
+         .WithMany(x => x.Externals)
+         .HasForeignKey(x => x.AccountId);
    }
 }

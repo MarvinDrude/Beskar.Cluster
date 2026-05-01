@@ -13,6 +13,25 @@ public sealed class DbAccountDeviceConfiguration : IEntityTypeConfiguration<DbAc
    
    public void Configure(EntityTypeBuilder<DbAccountDevice> builder)
    {
-      throw new NotImplementedException();
+      builder.Property(e => e.Id)
+         .HasConversion(KeyConverter)
+         .HasDefaultValueSql("uuidv7()")
+         .ValueGeneratedOnAdd();
+
+      builder.Property(x => x.Fingerprint)
+         .HasMaxLength(2048);
+      
+      builder.Property(x => x.DeviceName)
+         .HasMaxLength(256);
+      
+      builder.Property(x => x.RefreshTokenHash)
+         .HasMaxLength(2048);
+
+      builder.Property(x => x.LastIpAddress)
+         .HasMaxLength(512);
+      
+      builder.HasOne(x => x.Account)
+         .WithMany(x => x.Devices)
+         .HasForeignKey(x => x.AccountId);
    }
 }
