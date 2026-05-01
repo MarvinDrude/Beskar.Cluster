@@ -15,7 +15,7 @@ namespace Beskar.Cluster.Database.Translation.Migrations
                 name: "LangGroups",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuidv7()"),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
@@ -31,7 +31,7 @@ namespace Beskar.Cluster.Database.Translation.Migrations
                 name: "Languages",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuidv7()"),
                     DisplayName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     TwoLetterCode = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
                     Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
@@ -49,7 +49,7 @@ namespace Beskar.Cluster.Database.Translation.Migrations
                 name: "LangKeys",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuidv7()"),
                     Key = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     LangGroupId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
@@ -72,7 +72,7 @@ namespace Beskar.Cluster.Database.Translation.Migrations
                 name: "LangEntries",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuidv7()"),
                     Text = table.Column<string>(type: "text", maxLength: 65535, nullable: false),
                     LangKeyId = table.Column<Guid>(type: "uuid", nullable: false),
                     LanguageId = table.Column<Guid>(type: "uuid", nullable: false),

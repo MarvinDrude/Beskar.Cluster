@@ -16,7 +16,7 @@ namespace Beskar.Cluster.Database.Main.Migrations
                 table: "SystemConfigEntries",
                 type: "uuid",
                 nullable: false,
-                defaultValueSql: "gen_random_uuid()",
+                defaultValueSql: "uuidv7()",
                 oldClrType: typeof(Guid),
                 oldType: "uuid");
         }
@@ -31,7 +31,7 @@ namespace Beskar.Cluster.Database.Main.Migrations
                 nullable: false,
                 oldClrType: typeof(Guid),
                 oldType: "uuid",
-                oldDefaultValueSql: "gen_random_uuid()");
+                oldDefaultValueSql: "uuidv7()");
         }
     }
 }

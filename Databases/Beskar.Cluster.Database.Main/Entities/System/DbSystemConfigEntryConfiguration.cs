@@ -20,7 +20,7 @@ public sealed class DbSystemConfigEntryConfiguration
    {
       builder.Property(e => e.Id)
          .HasConversion(KeyConverter)
-         .HasDefaultValueSql("gen_random_uuid()")
+         .HasDefaultValueSql("uuidv7()")
          .ValueGeneratedOnAdd();
 
       builder.HasKey(e => e.Key);

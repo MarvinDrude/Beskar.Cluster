@@ -35,7 +35,7 @@ namespace Beskar.Cluster.Database.Main.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasDefaultValueSql("uuidv7()");
 
                     b.Property<byte>("Type")
                         .HasColumnType("smallint");

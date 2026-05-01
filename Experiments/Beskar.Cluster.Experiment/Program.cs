@@ -7,6 +7,8 @@ var res = MarkdownLexResult.Create(
    ---
    # Header with **Bold** and `Code`
    
+   #### Subheader > a `a` **b**
+   
    > Blockquote start
    > > Nested Blockquote
    > > 1. List inside quote

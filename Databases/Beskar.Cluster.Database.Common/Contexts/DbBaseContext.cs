@@ -91,10 +91,11 @@ public abstract class DbBaseContext(
 
       foreach (var entity in modelBuilder.Model.GetEntityTypes())
       {
+         var entityType = modelBuilder.Entity(entity.ClrType);
+         entityType.Property<uint>("RowVersion").IsRowVersion();
+         
          if (typeof(IEntitySoftDeletable).IsAssignableFrom(entity.ClrType))
          {
-            var entityType = modelBuilder.Entity(entity.ClrType);
-            
             entityType
                .HasQueryFilter(CreateSoftDeleteFilter(entity.ClrType));
             entityType

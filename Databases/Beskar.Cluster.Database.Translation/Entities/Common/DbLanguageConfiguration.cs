@@ -15,7 +15,7 @@ public sealed class DbLanguageConfiguration : IEntityTypeConfiguration<DbLanguag
    {
       builder.Property(e => e.Id)
          .HasConversion(KeyConverter)
-         .HasDefaultValueSql("gen_random_uuid()")
+         .HasDefaultValueSql("uuidv7()")
          .ValueGeneratedOnAdd();
       
       builder.Property(x => x.DisplayName)
