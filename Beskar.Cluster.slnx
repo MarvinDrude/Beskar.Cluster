@@ -38,6 +38,7 @@
     <Project Path="Distributed/Beskar.Cluster.Distributed.Background.Runner/Beskar.Cluster.Distributed.Background.Runner.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Background/Beskar.Cluster.Distributed.Background.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Client/Beskar.Cluster.Distributed.Client.csproj" />
+    <Project Path="Distributed/Beskar.Cluster.Jwt/Beskar.Cluster.Jwt.csproj" />
   </Folder>
   <Folder Name="/Experiments/">
     <Project Path="Experiments/Beskar.Cluster.Experiment/Beskar.Cluster.Experiment.csproj" />

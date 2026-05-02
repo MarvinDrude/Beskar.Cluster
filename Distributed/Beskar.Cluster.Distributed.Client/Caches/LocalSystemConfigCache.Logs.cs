@@ -7,4 +7,7 @@ public sealed partial class LocalSystemConfigCache
 {
    [LoggerMessage(LogLevel.Error, "Failed to create config entry for {Key}: {Error}")]
    private partial void LogFailedToCreateConfigEntry(string key, string error);
+
+   [LoggerMessage(LogLevel.Error, "Failed to set JWT options - none found.")]
+   private partial void LogJwtOptionsSetError();
 }

@@ -1,9 +1,5 @@
-﻿using Beskar.Cluster.Configuration.Config;
-using Beskar.Cluster.Configuration.Constants;
-using Beskar.Cluster.Distributed.Client.Caches;
+﻿using Beskar.Cluster.Distributed.Client.Caches;
 using Beskar.Cluster.Distributed.Client.Constants;
-using Beskar.Cluster.Distributed.Client.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
 

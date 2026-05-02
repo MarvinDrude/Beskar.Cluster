@@ -2,10 +2,12 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using Beskar.Cluster.Configuration.Config;
+using Beskar.Cluster.Configuration.Constants;
 using Beskar.Cluster.Database.Common.Interfaces.Contexts;
 using Beskar.Cluster.Database.Main.Contexts;
 using Beskar.Cluster.Database.Main.Entities.System;
 using Beskar.Cluster.Database.Main.Enums.System;
+using Beskar.Cluster.Jwt;
 using Me.Memory.Extensions;
 using Me.Memory.Results;
 using Me.Memory.Results.Errors;
@@ -26,7 +28,9 @@ public sealed partial class LocalSystemConfigCache(
    public async Task Refresh(CancellationToken ct = default)
    {
       using var scope = _serviceProvider.CreateScope();
+      
       var contextFactory = scope.ServiceProvider.GetRequiredService<IDbPooledContextFactory<DbMainContext>>();
+      var jwtKeyResolver = scope.ServiceProvider.GetRequiredService<JwtKeyResolver>();
       
       await using var context = await contextFactory.CreateAsync(ct);
       ConcurrentDictionary<string, ISystemConfig> replacement = [];
@@ -45,9 +49,11 @@ public sealed partial class LocalSystemConfigCache(
       
       // replace all at once instead of one by one
       _cache = replacement;
+      UpdateJwtOptions(jwtKeyResolver);
    }
    
    public bool TryGetValue<T>(string key, [MaybeNullWhen(false)] out T value)
+      where T : class, ISystemConfig
    {
       if (_cache.TryGetValue(key, out var config) && config is T casted)
       {
@@ -55,8 +61,20 @@ public sealed partial class LocalSystemConfigCache(
          return true;
       }
 
-      value = default;
+      value = null;
       return false;
+   }
+
+   private void UpdateJwtOptions(JwtKeyResolver resolver)
+   {
+      if (TryGetValue<JwtSystemConfig>(ConfigurationKeys.JwtOptions, out var jwtOptions))
+      {
+         resolver.UpdateOptions(jwtOptions.Value);
+      }
+      else
+      {
+         LogJwtOptionsSetError();
+      }
    }
 
    private static Result<ISystemConfig, StringError> CreateConfigEntry(DbSystemConfigEntry entry)
@@ -82,6 +100,11 @@ public sealed partial class LocalSystemConfigCache(
          SystemConfigType.Integer => new IntegerSystemConfig
          {
             Value = entry.Value.Deserialize<SystemConfigValueWrapper<int>>()?.Value ?? 0
+         },
+         SystemConfigType.JwtOptions => new JwtSystemConfig()
+         {
+            Value = entry.Value.Deserialize<SystemConfigValueWrapper<JwtOptions>>()?.Value 
+               ?? throw new InvalidOperationException("Jwt options not found")
          },
          _ => null
       };

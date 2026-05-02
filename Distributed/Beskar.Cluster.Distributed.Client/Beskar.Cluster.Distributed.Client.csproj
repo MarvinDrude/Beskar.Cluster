@@ -11,6 +11,7 @@
      <ProjectReference Include="..\..\Common\Beskar.Cluster.Configuration\Beskar.Cluster.Configuration.csproj" />
      <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Common\Beskar.Cluster.Database.Common.csproj" />
      <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Jwt\Beskar.Cluster.Jwt.csproj" />
    </ItemGroup>
 
 </Project>

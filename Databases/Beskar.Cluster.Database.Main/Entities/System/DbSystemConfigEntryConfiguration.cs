@@ -56,6 +56,7 @@ public sealed class DbSystemConfigEntryConfiguration
          Value = JsonSerializer.SerializeToElement(new SystemConfigValueWrapper<JwtOptions>(new JwtOptions
          {
             Issuer = "Beskar.Cluster",
+            Audience = "Beskar.Cluster.Audience",
             KeyV1 = RandomUtils.GenerateRandomBytes(JwtOptions.KeyLength),
             KeyV2 = RandomUtils.GenerateRandomBytes(JwtOptions.KeyLength),
             IsV2Enabled = false,

@@ -8,6 +8,7 @@ public sealed class JwtOptions
    public const int KeyLength = 256;
    
    public required string Issuer { get; set; }
+   public required string Audience { get; set; }
    
    public required byte[] KeyV1 { get; set; }
    public required byte[] KeyV2 { get; set; }
