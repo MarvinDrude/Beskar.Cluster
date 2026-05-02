@@ -25,6 +25,7 @@
   </Folder>
   <Folder Name="/Databases/">
     <Project Path="Databases/Beskar.Cluster.Database.Common/Beskar.Cluster.Database.Common.csproj" />
+    <Project Path="Databases/Beskar.Cluster.Database.Content/Beskar.Cluster.Database.Content.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.File/Beskar.Cluster.Database.File.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Main/Beskar.Cluster.Database.Main.csproj" />
     <Project Path="Databases/Beskar.Cluster.Database.Telemetry/Beskar.Cluster.Database.Telemetry.csproj" />
@@ -32,6 +33,7 @@
     <Project Path="Databases/Beskar.Cluster.Database.Update/Beskar.Cluster.Database.Update.csproj" />
   </Folder>
   <Folder Name="/Distributed/">
+    <Project Path="Distributed/Beskar.Cluster.Backend/Beskar.Cluster.Backend.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Client/Beskar.Cluster.Distributed.Client.csproj" />
   </Folder>
   <Folder Name="/Experiments/">
@@ -42,5 +44,8 @@
     <Project Path="Logging/Beskar.Cluster.Logging.Module.Runner/Beskar.Cluster.Logging.Module.Runner.csproj" />
     <Project Path="Logging/Beskar.Cluster.Logging.Module/Beskar.Cluster.Logging.Module.csproj" />
     <Project Path="Logging/Beskar.Cluster.Logging.Protocol/Beskar.Cluster.Logging.Protocol.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="Web/Beskar.Cluster.Web.Components/Beskar.Cluster.Web.Components.csproj" />
   </Folder>
 </Solution>
