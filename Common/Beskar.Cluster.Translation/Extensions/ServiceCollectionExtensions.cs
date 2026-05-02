@@ -1,4 +1,5 @@
-﻿using Beskar.Cluster.Translation.Providers;
+﻿using Beskar.Cluster.Translation.Detectors;
+using Beskar.Cluster.Translation.Providers;
 using Beskar.CodeGeneration.LanguageGenerator.Marker.Interfaces;
 using Beskar.Languages;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ public static class ServiceCollectionExtensions
       public IServiceCollection AddBeskarClusterTranslationServices()
       {
          return services.AddSingleton<ITranslationProvider, DatabaseTranslationProvider>()
+            .AddSingleton<ILanguageDetector, AcceptLanguageDetector>()
             .AddSingleton<TranslationFacade>();
       }
    }

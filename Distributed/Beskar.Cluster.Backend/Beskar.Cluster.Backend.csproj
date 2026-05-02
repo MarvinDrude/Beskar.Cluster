@@ -7,6 +7,7 @@
    </PropertyGroup>
 
    <ItemGroup>
+     <PackageReference Include="Beskar.CodeGeneration.ObserveGenerator" />
      <PackageReference Include="Beskar.CodeGeneration.ProcessorGenerator" />
      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
      <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
@@ -15,6 +16,7 @@
 
    <ItemGroup>
      <ProjectReference Include="..\..\Common\Beskar.Cluster.Configuration\Beskar.Cluster.Configuration.csproj" />
+     <ProjectReference Include="..\..\Common\Beskar.Cluster.Translation\Beskar.Cluster.Translation.csproj" />
      <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Main\Beskar.Cluster.Database.Main.csproj" />
      <ProjectReference Include="..\Beskar.Cluster.Jwt\Beskar.Cluster.Jwt.csproj" />
    </ItemGroup>

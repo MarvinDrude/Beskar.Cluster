@@ -7,6 +7,7 @@
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
     <PackageVersion Include="Beskar.CodeGeneration.LanguageGenerator" Version="1.2.0" />
     <PackageVersion Include="Beskar.CodeGeneration.LanguageGenerator.Marker" Version="1.2.0" />
+    <PackageVersion Include="Beskar.CodeGeneration.ObserveGenerator" Version="1.2.1" />
     <PackageVersion Include="Beskar.CodeGeneration.PacketGenerator" Version="1.2.0" />
     <PackageVersion Include="Beskar.CodeGeneration.ProcessorGenerator" Version="1.2.1" />
     <PackageVersion Include="Beskar.CodeGeneration.TypeIdGenerator" Version="1.2.0" />

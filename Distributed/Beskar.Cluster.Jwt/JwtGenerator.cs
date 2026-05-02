@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Beskar.Cluster.Jwt.Parameters;
 using Me.Memory.Results;
 using Me.Memory.Results.Errors;
@@ -29,6 +28,7 @@ public sealed class JwtGenerator(
          {
             ValidIssuer = options.Issuer,
             ValidateIssuer = true,
+            ValidateLifetime = true,
             ValidAudience = options.Audience,
             ValidateAudience = true,
             ClockSkew = TimeSpan.FromMinutes(5),

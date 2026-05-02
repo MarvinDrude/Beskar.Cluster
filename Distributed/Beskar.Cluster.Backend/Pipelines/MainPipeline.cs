@@ -11,4 +11,7 @@ public sealed partial class MainPipeline
    
    [Step(20)]
    public required AuthenticationProcessor AuthenticationProcessor { get; init; }
+   
+   [Step(30)]
+   public required RequestProcessor RequestProcessor { get; init; }
 }

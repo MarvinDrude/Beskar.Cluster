@@ -10,10 +10,6 @@
    </ItemGroup>
 
    <ItemGroup>
-     <Folder Include="Detectors\" />
-   </ItemGroup>
-
-   <ItemGroup>
      <PackageReference Include="Beskar.CodeGeneration.LanguageGenerator.Marker" />
    </ItemGroup>
 

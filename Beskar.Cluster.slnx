@@ -22,6 +22,7 @@
     <Project Path="Common/Beskar.Cluster.Utilities/Beskar.Cluster.Utilities.csproj" />
   </Folder>
   <Folder Name="/Content/">
+    <Project Path="Content/Beskar.Cluster.Content/Beskar.Cluster.Content.csproj" />
     <Project Path="Content/Beskar.Cluster.Markdown/Beskar.Cluster.Markdown.csproj" />
   </Folder>
   <Folder Name="/Databases/">
@@ -34,6 +35,7 @@
     <Project Path="Databases/Beskar.Cluster.Database.Update/Beskar.Cluster.Database.Update.csproj" />
   </Folder>
   <Folder Name="/Distributed/">
+    <Project Path="Distributed/Beskar.Cluster.Backend.AspNet/Beskar.Cluster.Backend.AspNet.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Backend/Beskar.Cluster.Backend.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Background.Runner/Beskar.Cluster.Distributed.Background.Runner.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Background/Beskar.Cluster.Distributed.Background.csproj" />
