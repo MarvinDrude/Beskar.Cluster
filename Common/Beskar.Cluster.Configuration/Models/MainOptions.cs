@@ -27,5 +27,7 @@ public sealed class MainOptions
    /// </summary>
    public required string CacheConfiguration { get; set; }
    
+   public required string Key { get; set; }
+   
    public required TelemetryOptions Telemetry { get; set; }
 }

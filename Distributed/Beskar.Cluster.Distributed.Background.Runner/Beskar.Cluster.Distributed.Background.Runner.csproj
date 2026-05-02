@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+   <PropertyGroup>
+      <OutputType>Exe</OutputType>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\..\Databases\Beskar.Cluster.Database.Update\Beskar.Cluster.Database.Update.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Distributed.Background\Beskar.Cluster.Distributed.Background.csproj" />
+     <ProjectReference Include="..\Beskar.Cluster.Distributed.Client\Beskar.Cluster.Distributed.Client.csproj" />
+   </ItemGroup>
+
+</Project>

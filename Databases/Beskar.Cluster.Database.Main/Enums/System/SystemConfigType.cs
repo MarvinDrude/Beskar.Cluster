@@ -6,5 +6,6 @@ public enum SystemConfigType : byte
    Integer = 2,
    Float = 3,
    Boolean = 4,
-   DateTimeOffset = 5
+   DateTimeOffset = 5,
+   JwtOptions = 6,
 }

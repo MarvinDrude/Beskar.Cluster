@@ -8,4 +8,7 @@ public sealed partial class MainPipeline
 {
    [Step(10)]
    public required LogProcessor LogProcessor { get; init; }
+   
+   [Step(20)]
+   public required AuthenticationProcessor AuthenticationProcessor { get; init; }
 }

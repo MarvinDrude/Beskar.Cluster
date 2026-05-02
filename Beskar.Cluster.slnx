@@ -19,6 +19,7 @@
     <Project Path="Common/Beskar.Cluster.Sockets/Beskar.Cluster.Sockets.csproj" />
     <Project Path="Common/Beskar.Cluster.Translation.Abstractions/Beskar.Cluster.Translation.Abstractions.csproj" />
     <Project Path="Common/Beskar.Cluster.Translation/Beskar.Cluster.Translation.csproj" />
+    <Project Path="Common/Beskar.Cluster.Utilities/Beskar.Cluster.Utilities.csproj" />
   </Folder>
   <Folder Name="/Content/">
     <Project Path="Content/Beskar.Cluster.Markdown/Beskar.Cluster.Markdown.csproj" />
@@ -34,6 +35,8 @@
   </Folder>
   <Folder Name="/Distributed/">
     <Project Path="Distributed/Beskar.Cluster.Backend/Beskar.Cluster.Backend.csproj" />
+    <Project Path="Distributed/Beskar.Cluster.Distributed.Background.Runner/Beskar.Cluster.Distributed.Background.Runner.csproj" />
+    <Project Path="Distributed/Beskar.Cluster.Distributed.Background/Beskar.Cluster.Distributed.Background.csproj" />
     <Project Path="Distributed/Beskar.Cluster.Distributed.Client/Beskar.Cluster.Distributed.Client.csproj" />
   </Folder>
   <Folder Name="/Experiments/">
